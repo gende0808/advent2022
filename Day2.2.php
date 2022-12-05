@@ -1,9 +1,7 @@
 <?php
 $lines = explode(PHP_EOL, file_get_contents("Day2.txt"));
 $total = 0;
-$scores["A"] = 1;
-$scores["B"] = 2;
-$scores["C"] = 3;
+$scores = ["A" => 1, "B" => 2, "C" => 3];
 foreach ($lines as $line) {
     $values = explode(" ", $line);
     $total += ($values[1] == "Y") ? $scores[$values[0]] + 3 : 0;
