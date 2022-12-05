@@ -3,11 +3,11 @@ $crates = array(1 => ["R", "G", "J", "B", "T", "V", "Z"], 2 => ["J", "R", "V", "
 $lines = explode(PHP_EOL, file_get_contents("Day5.txt"));
 foreach ($lines as $line) {
     $command = array_values(array_filter(preg_split("(move | from | to )", $line)));
-    for ($amount = $command[0]; $amount > 0; $amount--) {
-        if (count($crates[$command[1]]) > 0) {
-            $crates[$command[2]][] = end($crates[$command[1]]);
-            array_pop($crates[$command[1]]);
-        }
+    $moveFrom = (count($crates[$command[1]]) <= $command[0]) ? 0 : count($crates[$command[1]]) - $command[0];
+    while (array_key_exists($moveFrom, $crates[$command[1]])) {
+        $crates[$command[2]][] = $crates[$command[1]][$moveFrom];
+        unset($crates[$command[1]][$moveFrom]);
+        $crates[$command[1]] = array_values($crates[$command[1]]);
     }
 }
 foreach ($crates as $stack) {
