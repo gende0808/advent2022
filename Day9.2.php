@@ -22,7 +22,7 @@ foreach ($lines as $line) {
                 }
             }
         }
-        $array[$bodyelements[9]["y"]][$bodyelements[9]["x"]] = "X";
+        $array[end($bodyelements)["y"]][end($bodyelements)["x"]] = "X";
     }
 }
 echo count(array_reduce($array,'array_merge',array()));
