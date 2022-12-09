@@ -9,16 +9,16 @@ foreach ($lines as $line) {
         $bodyelements[0]["x"] += (str_contains($line, "R")) ? 1 : (str_contains($line, "L") ? -1 : 0);
         for ($j = 1; $j < count($bodyelements); $j++) {
             if (abs($bodyelements[$j - 1]["y"] - $bodyelements[$j]["y"]) > 1 && abs($bodyelements[$j - 1]["x"] - $bodyelements[$j]["x"]) > 1) {
-                $bodyelements[$j]["y"] += ($bodyelements[$j - 1]["y"] > $bodyelements[$j]["y"]) ? 1 : -1;
-                $bodyelements[$j]["x"] += ($bodyelements[$j - 1]["x"] > $bodyelements[$j]["x"]) ? 1 : -1;
+                $bodyelements[$j]["y"] += ($bodyelements[$j - 1]["y"] <=> $bodyelements[$j]["y"]);
+                $bodyelements[$j]["x"] += ($bodyelements[$j - 1]["x"] <=> $bodyelements[$j]["x"]);
             } else {
                 if (abs($bodyelements[$j - 1]["y"] - $bodyelements[$j]["y"]) > 1) {
                     $bodyelements[$j]["x"] = $bodyelements[$j - 1]["x"];
-                    $bodyelements[$j]["y"] += ($bodyelements[$j - 1]["y"] > $bodyelements[$j]["y"]) ? 1 : -1;
+                    $bodyelements[$j]["y"] += ($bodyelements[$j - 1]["y"] <=> $bodyelements[$j]["y"]);
                 }
                 if (abs($bodyelements[$j - 1]["x"] - $bodyelements[$j]["x"]) > 1) {
                     $bodyelements[$j]["y"] = $bodyelements[$j - 1]["y"];
-                    $bodyelements[$j]["x"] += ($bodyelements[$j - 1]["x"] > $bodyelements[$j]["x"]) ? 1 : -1;
+                    $bodyelements[$j]["x"] += ($bodyelements[$j - 1]["x"] <=> $bodyelements[$j]["x"]);
                 }
             }
         }
